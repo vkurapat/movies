@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "Movies",
+    "section": "",
+    "text": "Rotten Tomatoes publishes two scores for every movie: the Tomatometer, which is the percentage of approved critics who gave a positive review, and the audience score, which comes from verified ticket buyers who rate films on a 0–5 scale converted to a percentage. The same movie can score very differently on each scale. This analysis uses a dataset of 1,000 movies to ask: do critics and audiences systematically disagree, and which genres drive the biggest gap between their scores?"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am Var Kurapati, a data science intern working with the PPBDS project. I investigated the critic-audience gap on Rotten Tomatoes because I was curious whether the disconnect between critics and general audiences is real and systematic, or just anecdotal. The data shows that genre plays a significant role — action and family films consistently score higher with audiences, while documentaries are rated more favorably by critics."
+  }
+]
