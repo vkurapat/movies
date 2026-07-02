@@ -1,0 +1,10 @@
+---
+title: "About"
+---
+
+I am Var Kurapati, a data science intern working with the PPBDS project. 
+I investigated the critic-audience gap on Rotten Tomatoes because I was 
+curious whether the disconnect between critics and general audiences is 
+real and systematic, or just anecdotal. The data shows that genre plays 
+a significant role — action and family films consistently score higher 
+with audiences, while documentaries are rated more favorably by critics.

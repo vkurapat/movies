@@ -5,6 +5,14 @@ execute:
   echo: false
 ---
 
+Rotten Tomatoes publishes two scores for every movie: the **Tomatometer**, which 
+is the percentage of approved critics who gave a positive review, and the 
+**audience score**, which comes from verified ticket buyers who rate films on a 
+0–5 scale converted to a percentage. The same movie can score very differently 
+on each scale. This analysis uses a dataset of 1,000 movies to ask: do critics 
+and audiences systematically disagree, and which genres drive the biggest gap 
+between their scores?
+
 ```{r}
 #| message: false
 library(tidyverse)
@@ -47,15 +55,19 @@ gap_by_genre |>
   geom_col() +
   geom_vline(xintercept = 0, color = "black", linetype = "dashed") +
   scale_fill_manual(values = c("TRUE" = "#2196F3", "FALSE" = "#F44336"),
-                    labels = c("TRUE" = "Critics favor", "FALSE" = "Audiences favor")) +
+                    labels = c("TRUE" = "Critics rate higher", "FALSE" = "Audiences rate higher")) +
   labs(
-    title = "Average critic vs. audience score gap by genre",
-    subtitle = "Positive = critics rate higher; negative = audiences rate higher",
-    x = "Mean gap (tomatoMeter - audienceScore)",
+    title = "Action and family films win audiences; documentaries win critics",
+    subtitle = "Mean difference in Tomatometer minus audience score, genres with 50+ movies",
+    x = "Mean gap (critic score minus audience score)",
     y = NULL,
-    fill = NULL
+    fill = NULL,
+    caption = "Source: Rotten Tomatoes via Kaggle (stefanoleone992)"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(legend.position = "bottom")
 ```
+
+
 
 
