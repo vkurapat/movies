@@ -8,3 +8,37 @@ execute:
 #| message: false
 library(tidyverse)
 ```
+
+```{r}
+#| message: false
+movies <- read_csv("data/rotten_tomatoes_movies.csv", show_col_types = FALSE)
+```
+
+```{r}
+movies |>
+  ggplot(aes(x = tomatoMeter)) +
+  geom_histogram(bins = 30) +
+  labs(
+    title = "Distribution of Tomatometer Scores",
+    subtitle = paste("n =", sum(!is.na(movies$tomatoMeter))),
+    x = "Tomatometer Score",
+    y = "Count"
+  )
+```
+
+```{r}
+movies_long <- movies |>
+  separate_longer_delim(genre, delim = ", ") |>
+  filter(!is.na(genre), genre != "")
+```
+
+```{r}
+#| cache: true
+movies_long <- movies |>
+  separate_longer_delim(genre, delim = ", ") |>
+  filter(!is.na(genre), genre != "")
+```
+
+
+
+
