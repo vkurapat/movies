@@ -36,7 +36,7 @@ movies_gap <- movies |>
   filter(!is.na(gap))
 ```
 
-````{r}
+```{r}
 gap_by_genre <- movies_gap |>
   separate_longer_delim(genre, delim = ", ") |>
   filter(!is.na(genre), genre != "") |>
@@ -47,7 +47,7 @@ gap_by_genre <- movies_gap |>
   ) |>
   filter(n >= 50) |>
   arrange(mean_gap)
-````
+```
 
 ```{r}
 gap_by_genre |>
@@ -67,6 +67,7 @@ gap_by_genre |>
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
+
 
 
 
