@@ -1,5 +1,6 @@
 ---
 title: "Movies"
+author: "Var Kurapati"
 execute:
   echo: false
 ---
@@ -15,30 +16,46 @@ movies <- read_csv("data/rotten_tomatoes_movies.csv", show_col_types = FALSE)
 ```
 
 ```{r}
-movies |>
-  ggplot(aes(x = tomatoMeter)) +
-  geom_histogram(bins = 30) +
-  labs(
-    title = "Distribution of Tomatometer Scores",
-    subtitle = paste("n =", sum(!is.na(movies$tomatoMeter))),
-    x = "Tomatometer Score",
-    y = "Count"
-  )
-```
-
-```{r}
-movies_long <- movies |>
-  separate_longer_delim(genre, delim = ", ") |>
-  filter(!is.na(genre), genre != "")
-```
-
-```{r}
 #| cache: true
 movies_long <- movies |>
   separate_longer_delim(genre, delim = ", ") |>
   filter(!is.na(genre), genre != "")
 ```
 
+```{r}
+movies_gap <- movies |>
+  mutate(gap = tomatoMeter - audienceScore) |>
+  filter(!is.na(gap))
+```
 
+````{r}
+gap_by_genre <- movies_gap |>
+  separate_longer_delim(genre, delim = ", ") |>
+  filter(!is.na(genre), genre != "") |>
+  group_by(genre) |>
+  summarise(
+    mean_gap = mean(gap, na.rm = TRUE),
+    n = n()
+  ) |>
+  filter(n >= 50) |>
+  arrange(mean_gap)
+````
+
+```{r}
+gap_by_genre |>
+  ggplot(aes(x = mean_gap, y = fct_reorder(genre, mean_gap), fill = mean_gap > 0)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = "black", linetype = "dashed") +
+  scale_fill_manual(values = c("TRUE" = "#2196F3", "FALSE" = "#F44336"),
+                    labels = c("TRUE" = "Critics favor", "FALSE" = "Audiences favor")) +
+  labs(
+    title = "Average critic vs. audience score gap by genre",
+    subtitle = "Positive = critics rate higher; negative = audiences rate higher",
+    x = "Mean gap (tomatoMeter - audienceScore)",
+    y = NULL,
+    fill = NULL
+  ) +
+  theme_minimal()
+```
 
 
